@@ -1,4 +1,4 @@
-import { DefaultTheme, ThemeProvider as StyledComponentsThemeProvider } from 'styled-components'
+import { ThemeProvider as StyledComponentsThemeProvider } from 'styled-components'
 import { lightTheme, darkTheme } from 'src/styles/theme'
 import React, { useCallback, useState } from 'react'
 import { createContext } from 'react'
@@ -12,15 +12,15 @@ const THEMES = {
 type ThemeType = keyof typeof THEMES
 
 const ThemeContext = createContext<{
-    theme: DefaultTheme
+    theme: ThemeType
     changeTheme: (themeName: ThemeType) => void
 }>({
-    theme: {} as DefaultTheme,
+    theme: 'light',
     changeTheme: (themeName) => {},
 })
 
 /**
- *  Provider for changing theme, it allows easily add storing theme in some indexDB
+ *  Provider for changing theme, it allows easily add storing theme in some indexDB or in cookie
  */
 const ThemeProvider = ({
     children,
@@ -29,15 +29,15 @@ const ThemeProvider = ({
     children: React.ReactNode
     [key: string]: any
 }) => {
-    const [theme, setTheme] = useState<DefaultTheme>(THEMES.light)
+    const [theme, setTheme] = useState<ThemeType>('light')
 
     const changeTheme = useCallback((themeName: ThemeType) => {
-        setTheme(THEMES[themeName])
+        setTheme(themeName)
     }, [])
 
     return (
         <ThemeContext.Provider value={{ theme, changeTheme }}>
-            <StyledComponentsThemeProvider theme={theme} {...props}>
+            <StyledComponentsThemeProvider theme={THEMES[theme]} {...props}>
                 {children}
             </StyledComponentsThemeProvider>
         </ThemeContext.Provider>

@@ -22,6 +22,7 @@ declare module 'styled-components' {
                 secondary: string
                 error: string
             }
+            divider: string
         }
         padding: {
             layoutHorizontal: string

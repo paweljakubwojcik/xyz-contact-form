@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+import Button from 'src/components/Button'
 import Card from 'src/components/Card'
 import PageHeader from 'src/components/PageHeader'
 import { FormState } from 'src/globalTypes'
@@ -8,6 +9,8 @@ type ThankYouScreenProps = {
 }
 
 export default function ThankYouScreen({ formData }: ThankYouScreenProps) {
+    const history = useHistory()
+
     return (
         <>
             <PageHeader>thank you</PageHeader>
@@ -17,7 +20,9 @@ export default function ThankYouScreen({ formData }: ThankYouScreenProps) {
                     {JSON.stringify(formData, undefined, 2)}
                 </pre>
             </Card>
-            <Link to={'/'}>Go Home</Link>
+            <div>
+                <Button onClick={() => history.push('/')}>Go Home</Button>
+            </div>
         </>
     )
 }

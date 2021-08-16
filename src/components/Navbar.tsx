@@ -1,6 +1,7 @@
 import { forwardRef } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import ThemeChanger from './ThemeChanger'
 
 export default forwardRef<HTMLElement, {}>(function Navbar(props, forwardedRef) {
     return (
@@ -10,6 +11,7 @@ export default forwardRef<HTMLElement, {}>(function Navbar(props, forwardedRef) 
                 <StyledLink to="/">Home</StyledLink>
                 <StyledLink to="/policy">Privacy Policy</StyledLink>
             </LinksContainer>
+            <ThemeChanger />
         </Wrapper>
     )
 })
@@ -36,5 +38,3 @@ const LinksContainer = styled.nav`
 const StyledLink = styled(Link)`
     margin: 1em;
 `
-
-

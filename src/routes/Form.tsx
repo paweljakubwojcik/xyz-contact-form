@@ -66,6 +66,7 @@ export default function FormPage() {
                                 type="text"
                                 label={'Name'}
                                 name="name"
+                                title="Enter your name"
                                 onChange={handleChange}
                                 value={formState.name}
                             />
@@ -73,6 +74,7 @@ export default function FormPage() {
                                 type="text"
                                 label={'Second Name'}
                                 name="secondName"
+                                title="Enter your second name"
                                 onChange={handleChange}
                                 value={formState.secondName}
                             />
@@ -80,12 +82,14 @@ export default function FormPage() {
                                 type="email"
                                 label={'Email'}
                                 name="email"
+                                title="Enter your email"
                                 onChange={handleChange}
                                 value={formState.email}
                             />
                             <Form.TextArea
                                 placeholder={placeholder}
                                 name="content"
+                                title="Write something"
                                 onChange={handleChange}
                                 maxLength={5000}
                                 value={formState.content}

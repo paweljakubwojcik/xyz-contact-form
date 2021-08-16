@@ -13,7 +13,7 @@ const Card = styled.div`
     color: ${(props) => props.theme.colors.text.secondary};
 
     border-radius: 4px;
-    border: 1px solid #e5e5e5;
+    border: 1px solid ${(props) => props.theme.colors.divider};
 `
 
 const Header = styled.div`

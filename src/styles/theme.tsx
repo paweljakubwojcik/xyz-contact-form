@@ -37,6 +37,7 @@ const lightTheme: DefaultTheme = {
             secondary: 'rgba(0, 0, 0, 0.54)',
             error: '#f44336',
         },
+        divider: `rgba(0, 0, 0, 0.12)`,
     },
     ...PADDINGS,
 }
@@ -53,7 +54,9 @@ const darkTheme: DefaultTheme = {
             secondary: 'rgba(255, 255, 255, 0.70)',
             error: '#f44336',
         },
+        divider: `rgba(255, 255, 255, 0.12)`,
     },
+
     ...PADDINGS,
 }
 

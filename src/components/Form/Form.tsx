@@ -1,4 +1,5 @@
 import styled, { DefaultTheme, StyledComponentProps } from 'styled-components'
+import LoadingSpinner from '../LoadingSpinner'
 import Input from './Input'
 import TextArea from './TextArea'
 
@@ -14,7 +15,11 @@ const Form = ({
     return (
         <StyledForm {...props}>
             {children}
-            {loading && <LoadingOverlay />}
+            {loading && (
+                <LoadingOverlay>
+                    <LoadingSpinner />
+                </LoadingOverlay>
+            )}
         </StyledForm>
     )
 }
@@ -31,6 +36,8 @@ const StyledForm = styled.form`
 
 const LoadingOverlay = styled.div`
     display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     width: 100%;
     height: 100%;

@@ -27,7 +27,7 @@ export const GlobalStyle = createGlobalStyle`
             outline: none;
     }
     * :focus:not(input):not(textarea):not(:active) {
-            outline: 1px solid ${(props) => props.theme.colors.main.contrastText};
+            outline: 1px solid ${(props) => props.theme.colors.divider};
     }
 
     a{
