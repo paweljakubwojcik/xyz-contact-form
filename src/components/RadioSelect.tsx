@@ -28,6 +28,7 @@ export default function RadioSelect({ options, active, setActive }: RadioSelectP
 
 const Container = styled.div`
     display: flex;
+    flex-wrap: wrap;
 
     margin: 1em;
 `

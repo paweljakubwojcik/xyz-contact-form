@@ -26,4 +26,6 @@ const ContentWrapper = styled.main<{ marginTop: number }>`
 
     padding: 1em ${(props) => props.theme.padding.layoutHorizontal};
     margin: 0 auto;
+
+    color: ${(props) => props.theme.colors.text.secondary};
 `
