@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router'
+import { Prompt, useHistory, useLocation } from 'react-router'
 import Button from 'src/components/Button'
 import Card from 'src/components/Card'
 import Form from 'src/components/Form/Form'
@@ -7,6 +7,14 @@ import PageHeader from 'src/components/PageHeader'
 import DEPARTAMENTS from 'src/constants/DEPARTAMENTS'
 import ThankYouScreen from 'src/containers/ThankYouScreen'
 import { FormState } from 'src/globalTypes'
+import useFetch from 'src/hooks/useFetch'
+
+const initialFormState: FormState = {
+    name: '',
+    secondName: '',
+    email: '',
+    content: '',
+}
 
 export default function FormPage() {
     const { state } = useLocation<{ department: typeof DEPARTAMENTS[number] }>()
@@ -21,24 +29,16 @@ export default function FormPage() {
     const [submitted, setSubmitted] = useState(false)
     const [loading, setLoading] = useState(false)
 
-    const [formState, setFormState] = useState<FormState>({
-        name: '',
-        secondName: '',
-        email: '',
-        content: '',
-    })
-
-    const [placeholder, setPlaceholder] = useState<string>()
-
+    const [formState, setFormState] = useState<FormState>(initialFormState)
+    const [formNotEmpty, setFormNotEmpty] = useState(false)
     useEffect(() => {
-        ;(async () => {
-            const placeholder = await fetch(
-                'https://baconipsum.com/api/?type=all-meat&paras=2'
-            ).then((res) => res.json())
+        const formNotEmpty = !!Object.values(formState).find((v) => !!v)
+        setFormNotEmpty(formNotEmpty)
+    }, [formState])
 
-            setPlaceholder(placeholder)
-        })()
-    }, [])
+    const { result: placeholder } = useFetch<string>(
+        'https://baconipsum.com/api/?type=all-meat&paras=2'
+    )
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormState((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -51,8 +51,24 @@ export default function FormPage() {
         setTimeout(() => {
             setLoading(false)
             setSubmitted(true)
+            setFormNotEmpty(false)
         }, 2000)
     }
+
+    // alert before reload
+    useEffect(() => {
+        function confirmExit(e: BeforeUnloadEvent) {
+            e.preventDefault()
+            e.returnValue = ''
+        }
+        if (formNotEmpty) {
+            window.addEventListener('beforeunload', confirmExit)
+        } else {
+            window.removeEventListener('beforeunload', confirmExit)
+        }
+
+        return () => window.removeEventListener('beforeunload', confirmExit)
+    }, [formNotEmpty])
 
     return (
         <>
@@ -62,6 +78,7 @@ export default function FormPage() {
                     <Card>
                         <Card.Header>{state?.department}</Card.Header>
                         <Form onSubmit={handleSubmit} loading={loading}>
+                            <Prompt when={formNotEmpty} message={`Your data will be lost`} />
                             <Form.Input
                                 type="text"
                                 label={'Name'}
