@@ -4,8 +4,14 @@ type ExtendedButtonProps = { disabled?: boolean }
 type ButtonProps = StyledComponentProps<'button', DefaultTheme, ExtendedButtonProps, never>
 
 export default function Button({ children, type = 'button', disabled, ...props }: ButtonProps) {
+    console.log(disabled)
     return (
-        <StyledButton type={type} tabIndex={disabled ? -1 : undefined} {...props}>
+        <StyledButton
+            type={type}
+            tabIndex={disabled ? -1 : undefined}
+            disabled={disabled}
+            {...props}
+        >
             {children}
         </StyledButton>
     )
@@ -25,4 +31,6 @@ const StyledButton = styled.button<ExtendedButtonProps>`
     border-radius: 2px;
 
     ${(props) => (props.disabled ? 'cursor: default; pointer-events: none;' : '')};
+
+    transition: background-color 0.3s;
 `
