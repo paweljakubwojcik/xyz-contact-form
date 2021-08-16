@@ -4,7 +4,6 @@ type ExtendedButtonProps = { disabled?: boolean }
 type ButtonProps = StyledComponentProps<'button', DefaultTheme, ExtendedButtonProps, never>
 
 export default function Button({ children, type = 'button', disabled, ...props }: ButtonProps) {
-    console.log(disabled)
     return (
         <StyledButton
             type={type}

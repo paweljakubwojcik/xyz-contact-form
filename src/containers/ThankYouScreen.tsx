@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom'
 import Card from 'src/components/Card'
 import PageHeader from 'src/components/PageHeader'
+import { FormState } from 'src/globalTypes'
 
 type ThankYouScreenProps = {
-    formData: {
-        [key: string]: any
-    }
+    formData: FormState
 }
 
 export default function ThankYouScreen({ formData }: ThankYouScreenProps) {

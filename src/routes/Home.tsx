@@ -14,7 +14,6 @@ export default function Home() {
         history.push('/form', { department: choosenDepart })
     }
 
-    console.log(choosenDepart)
     return (
         <>
             <PageHeader>Home</PageHeader>

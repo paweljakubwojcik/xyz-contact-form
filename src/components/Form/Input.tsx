@@ -1,15 +1,7 @@
 import { useState } from 'react'
 import styled, { DefaultTheme, StyledComponentProps } from 'styled-components'
 
-const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 500px;
-    width: 100%;
-`
-
-type ExtendedInputProps = {
+export type ExtendedInputProps = {
     label: string
     id?: string
 }
@@ -29,19 +21,11 @@ const Input = ({
     )
 }
 
-const TextArea = ({
-    ...props
-}: StyledComponentProps<'textarea', DefaultTheme, Omit<ExtendedInputProps, 'label'>, never>) => {
-    return (
-        <InputWrapper>
-            <StyledInput as={'textarea'} {...props} />
-        </InputWrapper>
-    )
-}
+export default Input
 
-const InputPadding = '0.5em'
+export const InputPadding = '0.5em'
 
-const InputWrapper = styled.div`
+export const InputWrapper = styled.div`
     position: relative;
 
     display: flex;
@@ -52,7 +36,7 @@ const InputWrapper = styled.div`
     width: 100%;
 `
 
-const StyledInput = styled.input`
+export const StyledInput = styled.input`
     padding: 0.3em ${InputPadding};
     max-width: 100%;
     width: 100%;
@@ -92,5 +76,3 @@ const StyledLabel = styled.label<{ focused: boolean }>`
     transform-origin: left center;
     transition: transform 0.4s, color 0.3s;
 `
-
-export default Object.assign(Form, { Input, TextArea })

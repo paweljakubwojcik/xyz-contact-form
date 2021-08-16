@@ -2,17 +2,11 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import { useHistory, useLocation } from 'react-router'
 import Button from 'src/components/Button'
 import Card from 'src/components/Card'
-import Form from 'src/components/Form'
+import Form from 'src/components/Form/Form'
 import PageHeader from 'src/components/PageHeader'
 import DEPARTAMENTS from 'src/constants/DEPARTAMENTS'
 import ThankYouScreen from 'src/containers/ThankYouScreen'
-
-type FormState = {
-    name?: string
-    secondName?: string
-    email?: string
-    content?: string
-}
+import { FormState } from 'src/globalTypes'
 
 export default function FormPage() {
     const { state } = useLocation<{ department: typeof DEPARTAMENTS[number] }>()
@@ -25,6 +19,7 @@ export default function FormPage() {
     }, [history, state])
 
     const [submitted, setSubmitted] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const [formState, setFormState] = useState<FormState>({
         name: '',
@@ -33,14 +28,30 @@ export default function FormPage() {
         content: '',
     })
 
+    const [placeholder, setPlaceholder] = useState<string>()
+
+    useEffect(() => {
+        ;(async () => {
+            const placeholder = await fetch(
+                'https://baconipsum.com/api/?type=all-meat&paras=2'
+            ).then((res) => res.json())
+
+            setPlaceholder(placeholder)
+        })()
+    }, [])
+
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormState((prev) => ({ ...prev, [e.target.name]: e.target.value }))
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        console.log(formState)
-        setSubmitted(true)
+        setLoading(true)
+        // simulating sending real request
+        setTimeout(() => {
+            setLoading(false)
+            setSubmitted(true)
+        }, 2000)
     }
 
     return (
@@ -50,7 +61,7 @@ export default function FormPage() {
                     <PageHeader>Form</PageHeader>
                     <Card>
                         <Card.Header>{state?.department}</Card.Header>
-                        <Form onSubmit={handleSubmit}>
+                        <Form onSubmit={handleSubmit} loading={loading}>
                             <Form.Input
                                 type="text"
                                 label={'Name'}
@@ -73,9 +84,10 @@ export default function FormPage() {
                                 value={formState.email}
                             />
                             <Form.TextArea
-                                placeholder={'lorem ipsum'}
+                                placeholder={placeholder}
                                 name="content"
                                 onChange={handleChange}
+                                maxLength={5000}
                                 value={formState.content}
                             />
                             <Button type="submit">Submit</Button>
