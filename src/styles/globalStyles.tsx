@@ -21,6 +21,8 @@ export const GlobalStyle = createGlobalStyle`
         font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',monospace;
     }
 
+    pre { white-space: pre-wrap; }
+
     * :focus {
             outline: none;
     }
