@@ -1,3 +1,5 @@
+import PageHeader from 'src/components/PageHeader'
+
 export default function PrivacyPolicy() {
-    return <div>Privacy Policy</div>
+    return <PageHeader>Privacy</PageHeader>
 }

@@ -1,17 +1,18 @@
+import { forwardRef } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-export default function Header() {
+export default forwardRef<HTMLElement, {}>(function Navbar(props, forwardedRef) {
     return (
-        <Wrapper>
+        <Wrapper ref={forwardedRef}>
             <Logo>XYZ</Logo>
-            <NavContainer>
+            <LinksContainer>
                 <StyledLink to="/">Home</StyledLink>
                 <StyledLink to="/policy">Privacy Policy</StyledLink>
-            </NavContainer>
+            </LinksContainer>
         </Wrapper>
     )
-}
+})
 
 const Wrapper = styled.header`
     display: flex;
@@ -28,10 +29,12 @@ const Logo = styled.h1`
     margin-right: auto;
 `
 
-const NavContainer = styled.nav`
+const LinksContainer = styled.nav`
     display: flex;
 `
 
 const StyledLink = styled(Link)`
     margin: 1em;
 `
+
+

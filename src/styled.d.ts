@@ -12,6 +12,7 @@ declare module 'styled-components' {
     export interface DefaultTheme {
         colors: {
             main: Color
+            inactive: Color
             background: {
                 paper: string
                 default: string

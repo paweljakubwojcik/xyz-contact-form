@@ -8,11 +8,17 @@ const PADDINGS: Pick<DefaultTheme, 'padding'> = {
     },
 }
 
-const COMMON_COLOURS: Pick<DefaultTheme['colors'], 'main'> = {
+const COMMON_COLOURS: Pick<DefaultTheme['colors'], 'main' | 'inactive'> = {
     main: {
         light: 'hsl(207,90%,70%)',
         main: 'hsl(207,90%,54%)',
         dark: 'hsl(207,90%,30%)',
+        contrastText: '#ffffff',
+    },
+    inactive: {
+        light: '#7b7b7bb7',
+        main: '#757373',
+        dark: '#444444',
         contrastText: '#ffffff',
     },
 }

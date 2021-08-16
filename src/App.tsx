@@ -1,5 +1,5 @@
 import { ThemeProvider } from './context/Theme'
-import Layout from './Layout'
+import Layout from './components/Layout'
 import Home from './routes/Home'
 import Form from './routes/Form'
 import PrivacyPolicy from './routes/PrivacyPolicy'
