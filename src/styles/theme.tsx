@@ -1,14 +1,27 @@
 import { DefaultTheme } from 'styled-components'
 
+// common colors
+
+const PADDINGS: Pick<DefaultTheme, 'padding'> = {
+    padding: {
+        layoutHorizontal: 'min(3em, 5%)',
+    },
+}
+
+const COMMON_COLOURS: Pick<DefaultTheme['colors'], 'main'> = {
+    main: {
+        light: 'hsl(207,90%,70%)',
+        main: 'hsl(207,90%,54%)',
+        dark: 'hsl(207,90%,30%)',
+        contrastText: '#ffffff',
+    },
+}
+
+// light and dark themes
+
 const lightTheme: DefaultTheme = {
     colors: {
-        main: {
-            light: 'hsl(207,90%,54%)',
-            main: 'hsl(207,90%,54%)',
-            dark: 'hsl(207,90%,54%)',
-            contrastText: '#ffffff',
-        },
-
+        ...COMMON_COLOURS,
         background: {
             paper: '#fff',
             default: '#fafafa',
@@ -19,17 +32,12 @@ const lightTheme: DefaultTheme = {
             error: '#f44336',
         },
     },
+    ...PADDINGS,
 }
 
 const darkTheme: DefaultTheme = {
     colors: {
-        main: {
-            light: 'hsl(207,90%,70%)',
-            main: 'hsl(207,90%,54%)',
-            dark: 'hsl(207,90%,30%)',
-            contrastText: '#ffffff',
-        },
-
+        ...COMMON_COLOURS,
         background: {
             paper: '#424242',
             default: '#303030',
@@ -40,6 +48,7 @@ const darkTheme: DefaultTheme = {
             error: '#f44336',
         },
     },
+    ...PADDINGS,
 }
 
 export { lightTheme, darkTheme }

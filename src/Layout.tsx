@@ -19,6 +19,6 @@ const ContentWrapper = styled.main`
     display: flex;
     max-width: 1000px;
 
-    padding: 1em;
+    padding: 1em ${(props) => props.theme.padding.layoutHorizontal};
     margin: 0 auto;
 `

@@ -22,5 +22,8 @@ declare module 'styled-components' {
                 error: string
             }
         }
+        padding: {
+            layoutHorizontal: string
+        }
     }
 }

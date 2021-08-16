@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export default function Header() {
@@ -5,8 +6,8 @@ export default function Header() {
         <Wrapper>
             <Logo>XYZ</Logo>
             <NavContainer>
-                <div>Link 1</div>
-                <div>Link 2</div>
+                <StyledLink to="/">Home</StyledLink>
+                <StyledLink to="/policy">Privacy Policy</StyledLink>
             </NavContainer>
         </Wrapper>
     )
@@ -16,10 +17,11 @@ const Wrapper = styled.header`
     display: flex;
     align-items: center;
 
-    padding: 0 min(3em, 5%);
+    padding: 0 ${(props) => props.theme.padding.layoutHorizontal};
 
     background-color: ${(props) => props.theme.colors.main.main};
     color: ${(props) => props.theme.colors.main.contrastText};
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.24);
 `
 
 const Logo = styled.h1`
@@ -28,4 +30,8 @@ const Logo = styled.h1`
 
 const NavContainer = styled.nav`
     display: flex;
+`
+
+const StyledLink = styled(Link)`
+    margin: 1em;
 `
