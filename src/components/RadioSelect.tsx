@@ -19,7 +19,7 @@ export default function RadioSelect({ options, active, setActive }: RadioSelectP
                         checked={active === value}
                         onChange={() => setActive(value)}
                     />
-                    <label htmlFor={label}>{label}</label>
+                    <StyledLabel htmlFor={label}>{label}</StyledLabel>
                 </SelectOption>
             ))}
         </Container>
@@ -38,6 +38,7 @@ const SelectOption = styled.div<{ checked: boolean }>`
     color: ${(props) => (props.checked ? props.theme.colors.main.main : 'inherit')};
 
     margin: 1em;
+    cursor: pointer;
 
     &:hover,
     &:focus-within {
@@ -57,10 +58,16 @@ const StyledInput = styled.input`
     width: 16px;
     height: 16px;
 
+    cursor: inherit;
+
     border: 2px solid #999;
     transition: 0.2s all linear;
 
     &:checked {
         border: 2px solid ${(props) => props.theme.colors.main.main};
     }
+`
+
+const StyledLabel = styled.label`
+    cursor: inherit;
 `

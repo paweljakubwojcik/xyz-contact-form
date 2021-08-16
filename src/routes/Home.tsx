@@ -4,8 +4,7 @@ import Button from 'src/components/Button'
 import Card from 'src/components/Card'
 import PageHeader from 'src/components/PageHeader'
 import RadioSelect from 'src/components/RadioSelect'
-
-const DEPARTAMENTS = ['XYZ Warszawa, Poland', 'ABC Kraków, Poland', 'RNQ Berlin, Germany'] as const
+import DEPARTAMENTS from '../constants/DEPARTAMENTS'
 
 export default function Home() {
     const history = useHistory()
@@ -26,7 +25,7 @@ export default function Home() {
                     active={choosenDepart}
                     setActive={setChoosenDepart}
                 />
-                <Button onClick={handleGoToForm} disabled={!!choosenDepart}>
+                <Button onClick={handleGoToForm} disabled={typeof choosenDepart === 'undefined'}>
                     Go to Form
                 </Button>
             </Card>
