@@ -74,6 +74,10 @@ export default function FormPage() {
         try {
             checkSecondsValue()
             setLoading(true)
+            // if some hacker tries to edit html directly and deletes disabled class from button
+            if (areThereAnyErrors) {
+                throw new Error('błędne dane')
+            }
             // simulating sending real request
             setTimeout(() => {
                 setLoading(false)
@@ -82,6 +86,8 @@ export default function FormPage() {
             }, 1000)
         } catch (e) {
             setErrors({ form: [e] })
+        } finally {
+            setLoading(false)
         }
     }
 

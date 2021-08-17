@@ -64,8 +64,24 @@ const StyledInput = styled.input`
     border: 2px solid #999;
     transition: 0.2s all linear;
 
+    &::after {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+
+        background-color: ${(props) => props.theme.colors.main.main};
+
+        transform: scale(0);
+        transition: transform 0.2s;
+    }
+
     &:checked {
         border: 2px solid ${(props) => props.theme.colors.main.main};
+        &::after {
+            transform: scale(0.9);
+        }
     }
 `
 
