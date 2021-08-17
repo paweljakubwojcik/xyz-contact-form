@@ -32,7 +32,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 Triggers deployment on gh-pages
 
-## Dev and build using Docker 
+## Run using Docker 
 
 ### build docker image
 
