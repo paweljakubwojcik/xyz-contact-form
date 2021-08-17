@@ -3,7 +3,7 @@ import PageHeader from 'src/components/PageHeader'
 export default function PrivacyPolicy() {
     return (
         <>
-            <PageHeader>Privacy</PageHeader>
+            <PageHeader>Polityka Prywatności</PageHeader>
             <section>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor

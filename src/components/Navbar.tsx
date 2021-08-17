@@ -9,7 +9,7 @@ export default forwardRef<HTMLElement, {}>(function Navbar(props, forwardedRef) 
             <Logo>XYZ</Logo>
             <LinksContainer>
                 <StyledLink to="/">Home</StyledLink>
-                <StyledLink to="/policy">Privacy Policy</StyledLink>
+                <StyledLink to="/policy">Polityka Prwatności</StyledLink>
             </LinksContainer>
             <ThemeChanger />
         </Wrapper>

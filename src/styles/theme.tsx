@@ -46,7 +46,7 @@ const darkTheme: DefaultTheme = {
     colors: {
         ...COMMON_COLOURS,
         background: {
-            paper: '#424242',
+            paper: '#393939',
             default: '#303030',
         },
         text: {

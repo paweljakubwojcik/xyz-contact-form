@@ -82,13 +82,13 @@ export default function FormPage() {
         <>
             {!submitted ? (
                 <>
-                    <PageHeader>Form</PageHeader>
+                    <PageHeader>Formularz zgłoszeniowy</PageHeader>
                     <Card>
                         <Card.Header>{state?.department}</Card.Header>
                         <Form onSubmit={handleSubmit} loading={loading}>
                             <Form.Input
                                 type="text"
-                                label={'Name'}
+                                label={'Imię'}
                                 name="name"
                                 title="Enter your name"
                                 onChange={handleChange}
@@ -97,7 +97,7 @@ export default function FormPage() {
                             />
                             <Form.Input
                                 type="text"
-                                label={'Second Name'}
+                                label={'Nazwisko'}
                                 name="secondName"
                                 title="Enter your second name"
                                 onChange={handleChange}

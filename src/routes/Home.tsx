@@ -25,7 +25,7 @@ export default function Home() {
                     setActive={setChoosenDepart}
                 />
                 <Button onClick={handleGoToForm} disabled={typeof choosenDepart === 'undefined'}>
-                    Go to Form
+                    Dalej
                 </Button>
             </Card>
         </>

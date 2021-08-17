@@ -13,9 +13,9 @@ export default function ThankYouScreen({ formData }: ThankYouScreenProps) {
 
     return (
         <>
-            <PageHeader>thank you</PageHeader>
+            <PageHeader>Dziękujemy za zgłoszenie</PageHeader>
             <Card>
-                <Card.Header>This is submitted data</Card.Header>
+                <Card.Header>Wysłane dane:</Card.Header>
                 <pre style={{ overflow: 'auto', maxWidth: '100%' }}>
                     {JSON.stringify(formData, undefined, 2)}
                 </pre>
