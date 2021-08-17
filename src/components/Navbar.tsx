@@ -13,7 +13,7 @@ export default forwardRef<HTMLElement, {}>(function Navbar(props, forwardedRef) 
                 <StyledLink to="/">Home</StyledLink>
                 <StyledLink to="/policy">Polityka Prwatności</StyledLink>
             </LinksContainer>
-            <Clock style={{ margin: '0.5em' }} />
+            <Clock style={{ margin: '1em' }} />
             <ThemeChanger />
         </Wrapper>
     )
@@ -21,6 +21,8 @@ export default forwardRef<HTMLElement, {}>(function Navbar(props, forwardedRef) 
 
 const Wrapper = styled.header`
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
 
     padding: 0 ${(props) => props.theme.padding.layoutHorizontal};

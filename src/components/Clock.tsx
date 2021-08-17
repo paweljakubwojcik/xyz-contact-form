@@ -3,7 +3,7 @@ import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { useEffect, useState } from 'react'
 
 dayjs.extend(customParseFormat)
-const FORMAT_STRING = 'HH:mm:ss'
+const FORMAT_STRING = 'DD/MM/YY HH:mm:ss'
 
 export default function Clock({ ...props }) {
     const [dateString, setDateString] = useState(dayjs().format(FORMAT_STRING))
