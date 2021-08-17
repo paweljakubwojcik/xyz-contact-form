@@ -7,8 +7,13 @@ import Form from 'src/components/Form/Form'
 import PageHeader from 'src/components/PageHeader'
 import DEPARTAMENTS from 'src/constants/DEPARTAMENTS'
 import ThankYouScreen from 'src/containers/ThankYouScreen'
-import { FormState } from 'src/globalTypes'
+import { ErrorsState, FormState } from 'src/globalTypes'
 import useFetch from 'src/hooks/useFetch'
+import {
+    validateEmailField,
+    validateTextAreaField,
+    validateTextField,
+} from 'src/utils/validateFormState'
 
 const initialFormState: FormState = {
     name: '',
@@ -16,6 +21,8 @@ const initialFormState: FormState = {
     email: '',
     content: '',
 }
+
+const MAX_CONTENT_LENGTH = 5000
 
 export default function FormPage() {
     const { state } = useLocation<{ department: typeof DEPARTAMENTS[number] }>()
@@ -32,12 +39,21 @@ export default function FormPage() {
     const [loading, setLoading] = useState(false)
 
     const [formState, setFormState] = useState<FormState>(initialFormState)
+    const [errors, setErrors] = useState<ErrorsState>({})
 
     // formNotEmpty is changed independently form formState after submission
     const [formNotEmpty, setFormNotEmpty] = useState(false)
     useEffect(() => {
         const formNotEmpty = !!Object.values(formState).find((v) => !!v)
         setFormNotEmpty(formNotEmpty)
+
+        // validating form fields
+        setErrors({
+            name: validateTextField(formState.name),
+            secondName: validateTextField(formState.secondName),
+            email: validateEmailField(formState.email),
+            content: validateTextAreaField(formState.content, MAX_CONTENT_LENGTH),
+        })
     }, [formState])
 
     const { result: placeholder } = useFetch<string>(
@@ -59,6 +75,8 @@ export default function FormPage() {
         }, 1000)
     }
 
+    const areThereAnyErrors = !!Object.values(errors).find((v) => !!v)
+
     /* rendering 2 screens on the same route to not making 'thank u' url  */
     return (
         <>
@@ -68,12 +86,6 @@ export default function FormPage() {
                     <Card>
                         <Card.Header>{state?.department}</Card.Header>
                         <Form onSubmit={handleSubmit} loading={loading}>
-                            <ExtendedPrompt
-                                when={formNotEmpty}
-                                message={
-                                    'Formularz posiada nie wysłane dane, czy jesteś pewny że chcesz opuścić stronę ?'
-                                }
-                            />
                             <Form.Input
                                 type="text"
                                 label={'Name'}
@@ -81,6 +93,7 @@ export default function FormPage() {
                                 title="Enter your name"
                                 onChange={handleChange}
                                 value={formState.name}
+                                errors={errors.name}
                             />
                             <Form.Input
                                 type="text"
@@ -89,6 +102,7 @@ export default function FormPage() {
                                 title="Enter your second name"
                                 onChange={handleChange}
                                 value={formState.secondName}
+                                errors={errors.secondName}
                             />
                             <Form.Input
                                 type="email"
@@ -97,18 +111,28 @@ export default function FormPage() {
                                 title="Enter your email"
                                 onChange={handleChange}
                                 value={formState.email}
+                                errors={errors.email}
                             />
                             <Form.TextArea
                                 placeholder={placeholder}
                                 name="content"
                                 title="Write something"
                                 onChange={handleChange}
-                                maxLength={5000}
+                                maxLength={MAX_CONTENT_LENGTH}
                                 value={formState.content}
+                                errors={errors.content}
                             />
-                            <Button type="submit">Submit</Button>
+                            <Button type="submit" disabled={areThereAnyErrors}>
+                                Submit
+                            </Button>
                         </Form>
                     </Card>
+                    <ExtendedPrompt
+                        when={formNotEmpty}
+                        message={
+                            'Formularz posiada nie wysłane dane, czy jesteś pewny że chcesz opuścić stronę ?'
+                        }
+                    />
                 </>
             ) : (
                 <ThankYouScreen formData={formState} />
