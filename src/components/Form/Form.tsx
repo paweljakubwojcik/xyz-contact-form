@@ -37,6 +37,7 @@ const StyledForm = styled.form`
 
 const LoadingOverlay = styled.div`
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: absolute;

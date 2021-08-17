@@ -3,7 +3,7 @@ const emailError = 'proszę wprowadzić prawidłowy email'
 const toLongError = 'wiadomość jest zbyt długa'
 
 const checkIfIsEmpty = (value: string, errors: Array<string>) => {
-    if (!value.trim()) {
+    if (!value.toString().trim()) {
         errors.push(emptyError)
     }
 }

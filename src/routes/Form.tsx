@@ -60,9 +60,13 @@ export default function FormPage() {
         })
     }, [formState])
 
-    const { result: placeholder } = useFetch<string>(
+    const { result: placeholder = '' } = useFetch<string>(
         'https://baconipsum.com/api/?type=all-meat&paras=2'
     )
+
+    useEffect(() => {
+        setFormState((prev) => ({ ...prev, content: placeholder }))
+    }, [placeholder])
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormState((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -134,7 +138,6 @@ export default function FormPage() {
                                 errors={errors.email}
                             />
                             <Form.TextArea
-                                placeholder={placeholder}
                                 name="content"
                                 title="Write something"
                                 onChange={handleChange}
