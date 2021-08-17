@@ -123,7 +123,7 @@ export default function FormPage() {
                                 errors={errors.content}
                             />
                             <Button type="submit" disabled={areThereAnyErrors}>
-                                Submit
+                                Wyślij
                             </Button>
                         </Form>
                     </Card>

@@ -21,7 +21,7 @@ export default function ThankYouScreen({ formData }: ThankYouScreenProps) {
                 </pre>
             </Card>
             <div>
-                <Button onClick={() => history.push('/')}>Go Home</Button>
+                <Button onClick={() => history.push('/')}>Wróć</Button>
             </div>
         </>
     )

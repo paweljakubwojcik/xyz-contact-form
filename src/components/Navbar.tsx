@@ -1,16 +1,19 @@
 import { forwardRef } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import Clock from './Clock'
 import ThemeChanger from './ThemeChanger'
 
 export default forwardRef<HTMLElement, {}>(function Navbar(props, forwardedRef) {
     return (
         <Wrapper ref={forwardedRef}>
             <Logo>XYZ</Logo>
+
             <LinksContainer>
                 <StyledLink to="/">Home</StyledLink>
                 <StyledLink to="/policy">Polityka Prwatności</StyledLink>
             </LinksContainer>
+            <Clock />
             <ThemeChanger />
         </Wrapper>
     )
