@@ -31,7 +31,13 @@ export default function InputWrapper({
     return (
         <Wrapper>
             <InputContainer {...rest}>{children}</InputContainer>
-            {errorState && <ErrorMessages> {errors?.map((e) => e)} </ErrorMessages>}
+            {errorState && (
+                <ErrorMessages>
+                    {errors?.map((e) => (
+                        <div>{`${e}, `}</div>
+                    ))}
+                </ErrorMessages>
+            )}
         </Wrapper>
     )
 }

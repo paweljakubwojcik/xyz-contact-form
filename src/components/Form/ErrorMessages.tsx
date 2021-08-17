@@ -10,5 +10,10 @@ export default function ErrorMessages({ children }: ErrorMessagesProps) {
 }
 
 const Errors = styled.div`
+    display: flex;
+    & > * {
+        margin: 0 0.3em;
+    }
+
     color: ${(props) => props.theme.colors.text.error};
 `
