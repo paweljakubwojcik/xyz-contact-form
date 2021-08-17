@@ -31,3 +31,14 @@ It correctly bundles React in production mode and optimizes the build for the be
 #### `npm run deploy`
 
 Triggers deployment on gh-pages
+
+## Dev and build using Docker 
+
+### build docker image
+
+`docker build . --tag [image-name]`
+
+### run container 
+
+`docker run -p 3000:3000 [image-name]`
+
