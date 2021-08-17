@@ -11,7 +11,7 @@ function App() {
         <ThemeProvider>
             <GlobalStyle />
 
-            <Router>
+            <Router basename={'xyz-contact-form'}>
                 <Layout>
                     <Switch>
                         <Route exact path="/">

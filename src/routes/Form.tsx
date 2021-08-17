@@ -45,7 +45,7 @@ export default function FormPage() {
     const [formState, setFormState] = useState<FormState>(initialFormState)
     const [errors, setErrors] = useState<ErrorsState>({})
 
-    // formNotEmpty is changed independently form formState after submission
+    // formNotEmpty is changed independently from formState after submission
     const [formNotEmpty, setFormNotEmpty] = useState(false)
     useEffect(() => {
         const formNotEmpty = !!Object.values(formState).find((v) => !!v)
