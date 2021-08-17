@@ -17,6 +17,7 @@ const Form = ({
             {children}
             {loading && (
                 <LoadingOverlay>
+                    <div>Just simulating real request</div>
                     <LoadingSpinner />
                 </LoadingOverlay>
             )}

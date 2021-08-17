@@ -1,7 +1,8 @@
 import { ChangeEvent, useEffect, useState } from 'react'
-import { Prompt, useHistory, useLocation } from 'react-router'
+import { useHistory, useLocation } from 'react-router'
 import Button from 'src/components/Button'
 import Card from 'src/components/Card'
+import ExtendedPrompt from 'src/components/ExtendedPrompt'
 import Form from 'src/components/Form/Form'
 import PageHeader from 'src/components/PageHeader'
 import DEPARTAMENTS from 'src/constants/DEPARTAMENTS'
@@ -19,6 +20,7 @@ const initialFormState: FormState = {
 export default function FormPage() {
     const { state } = useLocation<{ department: typeof DEPARTAMENTS[number] }>()
     const history = useHistory()
+
     // handling typing url directly in the browser
     useEffect(() => {
         if (!state || !state.department) {
@@ -30,6 +32,8 @@ export default function FormPage() {
     const [loading, setLoading] = useState(false)
 
     const [formState, setFormState] = useState<FormState>(initialFormState)
+
+    // formNotEmpty is changed independently form formState after submission
     const [formNotEmpty, setFormNotEmpty] = useState(false)
     useEffect(() => {
         const formNotEmpty = !!Object.values(formState).find((v) => !!v)
@@ -52,24 +56,10 @@ export default function FormPage() {
             setLoading(false)
             setSubmitted(true)
             setFormNotEmpty(false)
-        }, 2000)
+        }, 1000)
     }
 
-    // alert before reload
-    useEffect(() => {
-        function confirmExit(e: BeforeUnloadEvent) {
-            e.preventDefault()
-            e.returnValue = ''
-        }
-        if (formNotEmpty) {
-            window.addEventListener('beforeunload', confirmExit)
-        } else {
-            window.removeEventListener('beforeunload', confirmExit)
-        }
-
-        return () => window.removeEventListener('beforeunload', confirmExit)
-    }, [formNotEmpty])
-
+    /* rendering 2 screens on the same route to not making 'thank u' url  */
     return (
         <>
             {!submitted ? (
@@ -78,7 +68,12 @@ export default function FormPage() {
                     <Card>
                         <Card.Header>{state?.department}</Card.Header>
                         <Form onSubmit={handleSubmit} loading={loading}>
-                            <Prompt when={formNotEmpty} message={`Your data will be lost`} />
+                            <ExtendedPrompt
+                                when={formNotEmpty}
+                                message={
+                                    'Formularz posiada nie wysłane dane, czy jesteś pewny że chcesz opuścić stronę ?'
+                                }
+                            />
                             <Form.Input
                                 type="text"
                                 label={'Name'}
