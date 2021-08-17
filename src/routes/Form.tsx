@@ -90,7 +90,6 @@ export default function FormPage() {
             }, 1000)
         } catch (e) {
             setErrors({ form: [e] })
-        } finally {
             setLoading(false)
         }
     }

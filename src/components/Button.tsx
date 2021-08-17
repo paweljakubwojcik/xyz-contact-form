@@ -18,6 +18,7 @@ export default function Button({ children, type = 'button', disabled, ...props }
 
 const StyledButton = styled.button<ExtendedButtonProps>`
     font-weight: bold;
+    font-size: inherit;
 
     padding: 0.4em 0.6em;
     margin: 1em;
