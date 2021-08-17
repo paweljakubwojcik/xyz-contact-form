@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styled, { DefaultTheme, StyledComponentProps } from 'styled-components'
-import ErrorMessages from './ErrorMessages'
+import InputWrapper from './InputWrapper'
 
 export type ExtendedInputProps = {
     label: string
@@ -15,44 +15,25 @@ const Input = ({
     ...props
 }: StyledComponentProps<'input', DefaultTheme, ExtendedInputProps, never>) => {
     const [focused, setFocus] = useState<boolean>(false)
-    const [touched, setTouche] = useState(false)
-    useEffect(() => {
-        if (value) setTouche(true)
-    }, [value])
+    const [invalid, setInvalid] = useState(false)
 
-    const errorState = !!errors?.length && touched
     return (
-        <Wrapper>
-            <InputWrapper
-                onFocusCapture={() => setFocus(true)}
-                onBlurCapture={() => setFocus(false)}
-            >
-                <StyledInput {...props} value={value} invalid={errorState} />
-                <StyledLabel focused={focused || !!value}>{label}</StyledLabel>
-            </InputWrapper>
-            {errorState && <ErrorMessages> {errors?.map((e) => e)} </ErrorMessages>}
-        </Wrapper>
+        <InputWrapper
+            onFocusCapture={() => setFocus(true)}
+            onBlurCapture={() => setFocus(false)}
+            value={value}
+            errors={errors}
+            setErrorState={setInvalid}
+        >
+            <StyledInput {...props} value={value} invalid={invalid} />
+            <StyledLabel focused={focused || !!value}>{label}</StyledLabel>
+        </InputWrapper>
     )
 }
 
 export default Input
 
 export const InputPadding = '0.5em'
-
-const Wrapper = styled.div`
-    margin: 1em;
-    width: 100%;
-`
-
-export const InputWrapper = styled.div`
-    position: relative;
-
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-
-    width: 100%;
-`
 
 export const StyledInput = styled.input<{ invalid: boolean }>`
     padding: 0.3em ${InputPadding};

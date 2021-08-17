@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styled, { DefaultTheme, StyledComponentProps } from 'styled-components'
-import ErrorMessages from './ErrorMessages'
-import { ExtendedInputProps, InputWrapper, StyledInput } from './Input'
+import { ExtendedInputProps, StyledInput } from './Input'
+import InputWrapper from './InputWrapper'
 
 const TextArea = ({
     maxLength,
@@ -10,24 +10,19 @@ const TextArea = ({
     ...props
 }: StyledComponentProps<'textarea', DefaultTheme, Omit<ExtendedInputProps, 'label'>, never>) => {
     const numberOfCharacters = value?.toString().length
+    const [invalid, setInvalid] = useState(false)
 
-    const [touched, setTouche] = useState(false)
-    useEffect(() => {
-        if (value) setTouche(true)
-    }, [value])
-
-    const errorState = !!errors?.length && touched
     return (
-        <InputWrapper>
+        <InputWrapper value={value} setErrorState={setInvalid} errors={errors}>
             <StyledInput
                 as={'textarea'}
                 style={{ minHeight: '300px' }}
                 value={value}
                 maxLength={maxLength}
-                invalid={errorState}
+                invalid={invalid}
                 {...props}
             />
-            {errorState && <ErrorMessages> {errors?.map((e) => e)} </ErrorMessages>}
+
             <LengthIndicator>
                 {numberOfCharacters}/{maxLength}
             </LengthIndicator>
