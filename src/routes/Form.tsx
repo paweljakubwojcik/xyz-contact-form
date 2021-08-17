@@ -7,13 +7,15 @@ import Form from 'src/components/Form/Form'
 import PageHeader from 'src/components/PageHeader'
 import DEPARTAMENTS from 'src/constants/DEPARTAMENTS'
 import ThankYouScreen from 'src/containers/ThankYouScreen'
-import { ErrorsState, FormState } from 'src/globalTypes'
+import ErrorScreen from 'src/containers/ErrorScreen'
+import { FormState } from 'src/globalTypes'
 import useFetch from 'src/hooks/useFetch'
 import {
     validateEmailField,
     validateTextAreaField,
     validateTextField,
 } from 'src/utils/validateFormState'
+import checkSecondsValue from 'src/utils/checkSecondsValue'
 
 const initialFormState: FormState = {
     name: '',
@@ -21,6 +23,8 @@ const initialFormState: FormState = {
     email: '',
     content: '',
 }
+
+type ErrorsState = Partial<Record<keyof FormState, Array<string>> & { form: Array<Error> }>
 
 const MAX_CONTENT_LENGTH = 5000
 
@@ -66,16 +70,26 @@ export default function FormPage() {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        setLoading(true)
-        // simulating sending real request
-        setTimeout(() => {
-            setLoading(false)
-            setSubmitted(true)
-            setFormNotEmpty(false)
-        }, 1000)
+        // simulating real word error handling
+        try {
+            checkSecondsValue()
+            setLoading(true)
+            // simulating sending real request
+            setTimeout(() => {
+                setLoading(false)
+                setSubmitted(true)
+                setFormNotEmpty(false)
+            }, 1000)
+        } catch (e) {
+            setErrors({ form: [e] })
+        }
     }
 
     const areThereAnyErrors = !!Object.values(errors).find((v) => !!v)
+
+    if (errors.form?.length) {
+        return <ErrorScreen errors={errors.form} />
+    }
 
     /* rendering 2 screens on the same route to not making 'thank u' url  */
     return (

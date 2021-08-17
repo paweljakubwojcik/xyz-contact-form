@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 dayjs.extend(customParseFormat)
 const FORMAT_STRING = 'HH:mm:ss'
 
-export default function Clock() {
+export default function Clock({ ...props }) {
     const [dateString, setDateString] = useState(dayjs().format(FORMAT_STRING))
     useEffect(() => {
         let intervalId = setInterval(() => {
@@ -15,5 +15,5 @@ export default function Clock() {
             clearInterval(intervalId)
         }
     }, [])
-    return <div style={{ margin: '0.5em' }}>{dateString}</div>
+    return <div {...props}>{dateString}</div>
 }

@@ -13,7 +13,7 @@ export default forwardRef<HTMLElement, {}>(function Navbar(props, forwardedRef) 
                 <StyledLink to="/">Home</StyledLink>
                 <StyledLink to="/policy">Polityka Prwatności</StyledLink>
             </LinksContainer>
-            <Clock />
+            <Clock style={{ margin: '0.5em' }} />
             <ThemeChanger />
         </Wrapper>
     )

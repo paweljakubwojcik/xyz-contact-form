@@ -18,7 +18,7 @@ export default function Home() {
         <>
             <PageHeader>Home</PageHeader>
             <Card>
-                <Card.Header>Choose departament</Card.Header>
+                <Card.Header>Wybierz oddział</Card.Header>
                 <RadioSelect
                     options={DEPARTAMENTS.map((dep) => ({ label: dep, value: dep }))}
                     active={choosenDepart}
