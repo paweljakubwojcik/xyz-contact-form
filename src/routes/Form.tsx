@@ -44,6 +44,7 @@ export default function FormPage() {
 
     const [formState, setFormState] = useState<FormState>(initialFormState)
     const [errors, setErrors] = useState<ErrorsState>({})
+    const areThereAnyErrors = !!Object.values(errors).find((v) => !!v)
 
     // formNotEmpty is changed independently from formState after submission
     const [formNotEmpty, setFormNotEmpty] = useState(false)
@@ -63,7 +64,6 @@ export default function FormPage() {
     const { result: placeholder = '' } = useFetch<string>(
         'https://baconipsum.com/api/?type=all-meat&paras=2'
     )
-
     useEffect(() => {
         setFormState((prev) => ({ ...prev, content: placeholder }))
     }, [placeholder])
@@ -93,8 +93,6 @@ export default function FormPage() {
             setLoading(false)
         }
     }
-
-    const areThereAnyErrors = !!Object.values(errors).find((v) => !!v)
 
     if (errors.form?.length) {
         return <ErrorScreen errors={errors.form} />
@@ -152,7 +150,7 @@ export default function FormPage() {
                     <ExtendedPrompt
                         when={formNotEmpty}
                         message={
-                            'Formularz posiada nie wysłane dane, czy jesteś pewny że chcesz opuścić stronę ?'
+                            'Formularz posiada nie wysłane dane, czy jesteś pewny, że chcesz opuścić stronę ?'
                         }
                     />
                 </>
